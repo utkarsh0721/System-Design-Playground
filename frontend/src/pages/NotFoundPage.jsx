@@ -1,0 +1,2 @@
+import { Link } from 'react-router-dom';
+export default function NotFoundPage() { return <main className="grid min-h-screen place-items-center bg-canvas px-5 text-center"><div><p className="font-mono text-cyan-300">ERROR 404</p><h1 className="mt-3 text-4xl font-semibold">Node not found</h1><p className="mt-3 text-slate-400">This route is outside the current architecture.</p><Link to="/" className="mt-7 inline-block rounded-xl bg-white px-5 py-2.5 font-medium text-slate-950">Return home</Link></div></main>; }

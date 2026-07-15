@@ -1,0 +1,2 @@
+import { CircleAlert, RefreshCw } from 'lucide-react';
+export default function ErrorState({ message, onRetry }) { return <div className="rounded-2xl border border-red-400/15 bg-red-400/5 p-6 text-center"><CircleAlert className="mx-auto text-red-300" /><p className="mt-3 text-sm text-red-200">{message || 'Unable to load this content.'}</p>{onRetry && <button onClick={onRetry} className="mt-4 inline-flex items-center gap-2 text-sm text-white"><RefreshCw size={15} />Retry</button>}</div>; }

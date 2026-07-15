@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import rateLimit from 'express-rate-limit';
+import { compare } from '../controllers/compareController.js';
+import protect from '../middleware/auth.js';
+import validate from '../middleware/validate.js';
+import asyncHandler from '../utils/asyncHandler.js';
+import { compareValidator } from '../utils/validators.js';
+const router = Router();
+router.post('/', protect, rateLimit({ windowMs: 60 * 60 * 1000, limit: 40, standardHeaders: 'draft-7', legacyHeaders: false }), validate(compareValidator), asyncHandler(compare));
+export default router;

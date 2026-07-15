@@ -1,0 +1,18 @@
+import { Router } from 'express';
+import activityRoutes from './activityRoutes.js';
+import authRoutes from './authRoutes.js';
+import compareRoutes from './compareRoutes.js';
+import designRoutes from './designRoutes.js';
+import learningRoutes from './learningRoutes.js';
+import quizRoutes from './quizRoutes.js';
+import userRoutes from './userRoutes.js';
+const router = Router();
+router.get('/health', (_req, res) => res.status(200).json({ success: true, message: 'System Design Playground API is healthy', data: { uptime: process.uptime(), timestamp: new Date().toISOString() } }));
+router.use('/auth', authRoutes);
+router.use('/users', userRoutes);
+router.use('/designs', designRoutes);
+router.use('/compare', compareRoutes);
+router.use('/learning', learningRoutes);
+router.use('/quizzes', quizRoutes);
+router.use('/activity', activityRoutes);
+export default router;

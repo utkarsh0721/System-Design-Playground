@@ -1,0 +1,12 @@
+import * as designService from '../services/designService.js';
+import { sendSuccess } from '../utils/apiResponse.js';
+export const save = async (req, res) => sendSuccess(res, { statusCode: 201, message: 'Design saved', data: { design: await designService.saveDesign(req.user.id, req.body) } });
+export const generate = async (req, res) => sendSuccess(res, { statusCode: 201, message: 'Architecture generated', data: await designService.generateAndSave(req.user.id, req.body) });
+export const list = async (req, res) => { const result = await designService.listDesigns(req.user.id, req.query); return sendSuccess(res, { data: result.items, meta: result.pagination }); };
+export const getOne = async (req, res) => sendSuccess(res, { data: { design: await designService.getDesign(req.params.id, req.user.id) } });
+export const update = async (req, res) => sendSuccess(res, { message: 'Design updated', data: { design: await designService.updateDesign(req.params.id, req.user.id, req.body) } });
+export const remove = async (req, res) => { await designService.removeDesign(req.params.id, req.user.id); return sendSuccess(res, { message: 'Design deleted' }); };
+export const duplicate = async (req, res) => sendSuccess(res, { statusCode: 201, message: 'Design duplicated', data: { design: await designService.duplicateDesign(req.params.id, req.user.id) } });
+export const favourite = async (req, res) => sendSuccess(res, { message: 'Favourite updated', data: { design: await designService.toggleFavourite(req.params.id, req.user.id, req.body.isFavourite) } });
+export const share = async (req, res) => sendSuccess(res, { message: req.body.enabled === false ? 'Sharing disabled' : 'Share link created', data: await designService.shareDesign(req.params.id, req.user.id, req.body.enabled !== false) });
+export const shared = async (req, res) => sendSuccess(res, { data: { design: await designService.getSharedDesign(req.params.shareId) } });

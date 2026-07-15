@@ -1,0 +1,14 @@
+import { Router } from 'express';
+import rateLimit from 'express-rate-limit';
+import * as controller from '../controllers/authController.js';
+import protect from '../middleware/auth.js';
+import validate from '../middleware/validate.js';
+import asyncHandler from '../utils/asyncHandler.js';
+import { loginValidator, registerValidator } from '../utils/validators.js';
+const router = Router();
+const authLimit = rateLimit({ windowMs: 15 * 60 * 1000, limit: 30, standardHeaders: 'draft-7', legacyHeaders: false, message: { success: false, message: 'Too many authentication attempts. Try again later.' } });
+router.post('/register', authLimit, validate(registerValidator), asyncHandler(controller.register));
+router.post('/login', authLimit, validate(loginValidator), asyncHandler(controller.login));
+router.get('/me', protect, asyncHandler(controller.me));
+router.post('/logout', protect, asyncHandler(controller.logout));
+export default router;

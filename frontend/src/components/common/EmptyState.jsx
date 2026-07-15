@@ -1,0 +1,2 @@
+import { FolderOpen } from 'lucide-react';
+export default function EmptyState({ title = 'Nothing here yet', description, action }) { return <div className="glass rounded-3xl px-6 py-14 text-center"><span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-cyan-300/10 text-cyan-300"><FolderOpen /></span><h3 className="mt-5 font-semibold text-white">{title}</h3>{description && <p className="mx-auto mt-2 max-w-md text-sm text-slate-400">{description}</p>}{action && <div className="mt-6">{action}</div>}</div>; }

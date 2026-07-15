@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import * as controller from '../controllers/activityController.js';
+import protect from '../middleware/auth.js';
+import asyncHandler from '../utils/asyncHandler.js';
+const router = Router();
+router.use(protect);
+router.get('/', asyncHandler(controller.list));
+router.post('/', asyncHandler(controller.create));
+router.delete('/', asyncHandler(controller.clear));
+export default router;
